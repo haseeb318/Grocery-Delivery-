@@ -29,6 +29,9 @@ function HomeCategories() {
                   className="w-full h-full object-contain rounded-full transition-all"
                 />
               </div>
+              <span className="text-xs font-medium text-zinc-600 text-center leading-tight">
+                {cat.name}
+              </span>
             </Link>
           ))}
         </div>
