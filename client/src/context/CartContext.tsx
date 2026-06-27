@@ -6,9 +6,10 @@ import {
   useState,
 } from "react";
 import type { CartItem, Product } from "../types";
+
 interface CartContextType {
   items: CartItem[];
-  addTocart: (product: Product, quantity?: number) => void;
+  addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -61,8 +62,29 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems([]);
     setIsCartOpen(false);
   };
+  const cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const cartTotal = items.reduce(
+    (sum, item) => sum + item.product.price * item.quantity,
+    0,
+  );
 
-  return <CartContext.Provider value={{}}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider
+      value={{
+        items,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        cartCount,
+        cartTotal,
+        isCartOpen,
+        setIsCartOpen,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 }
 
 export function useCart() {
