@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import {
+  ArrowRightIcon,
   MinusIcon,
   PlusIcon,
   ShoppingBagIcon,
   Trash2Icon,
   XIcon,
 } from "lucide-react";
-import { divIcon } from "leaflet";
 
 function CartSideBar() {
   const currency = import.meta.env.VITE_CURRENCY_SYMBO || "$";
@@ -21,7 +21,7 @@ function CartSideBar() {
     setIsCartOpen,
   } = useCart();
   const navigate = useNavigate();
-  if (isCartOpen) return null;
+  if (!isCartOpen) return null;
   const deliveryFee = cartTotal > 20 ? 0 : 1.99;
   const grandTotal = cartTotal + deliveryFee;
   return (
@@ -105,7 +105,10 @@ function CartSideBar() {
                           {(item.product.price * item.quantity).toFixed(2)}
                         </span>
                         <button className="p-1 text-app-text-light hover:text-app-error transition-colors">
-                          <Trash2Icon className="size-4" />
+                          <Trash2Icon
+                            onClick={() => removeFromCart(item.product._id)}
+                            className="size-4"
+                          />
                         </button>
                       </div>
                     </div>
@@ -148,6 +151,18 @@ function CartSideBar() {
                 {grandTotal.toFixed(2)}
               </span>
             </div>
+            <button
+              onClick={() => {
+                setIsCartOpen(false);
+                navigate("/checkout");
+                window.scrollTo(0, 0);
+              }}
+              className="w-full py-3 bg-app-orange text-white font-semibold rounded-xl
+             hover:bg-app-orange-dark transition-colors flex-center gap-2 active:scale-[0.98]
+            "
+            >
+              Proceed to CheckOut <ArrowRightIcon className="size-4" />
+            </button>
           </div>
         )}
       </div>
