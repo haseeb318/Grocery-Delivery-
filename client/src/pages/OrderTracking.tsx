@@ -1,5 +1,93 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import type { Order } from "../types";
+import { dummyDashboardOrdersData } from "../assets/data";
+import Loading from "../components/Loading";
+import { ArrowLeftIcon } from "lucide-react";
+import OrderOTP from "../components/OrderTracking/OrderOTP";
+import LiveMap from "../components/OrderTracking/LiveMap";
+import OrderTimeLine from "../components/OrderTracking/OrderTimeLine";
+
 function OrderTracking() {
-  return <div>OrderTracking</div>;
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [order, setOrder] = useState<Order | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [liveLocation, setLiveLocation] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
+  useEffect(() => {
+    setOrder(dummyDashboardOrdersData.find((o) => o._id === id) as any);
+    setLoading(false);
+  }, [id, navigate]);
+
+  if (loading) return <Loading />;
+  if (!order) null;
+  return (
+    <div className="min-h-screen mb-20  bg-app-cream">
+      <div className="max-w-6xl mx-auto sm:px-6 lg:px-8 py-8">
+        {/* header */}
+        <button
+          onClick={() => navigate("/orders")}
+          className="flex items-center gap-2 text-sm text-app-text-light hover:text-app-green mb-6 transition-colors"
+        >
+          <ArrowLeftIcon className="size-4" />
+          Back To Order
+        </button>
+        {/* order id , date , status */}
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-2xl font-semibold text-app-green">
+              Order #{order!._id.slice(-8).toLocaleLowerCase()}
+            </h1>
+            <p className="text-sm text-app-text-light mt-1">
+              Place on
+              {new Date(order!.createdAt).toLocaleDateString("en-us", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+          </div>
+          <span
+            className={`px-4 py-1.5 text-sm font-semibold rounded-full
+            ${order?.status === "Delivered" ? "bg-green-100 text-green-700" : order!.status === "Cancelled" ? "bg-red-100 text-red-700" : "bg-app-orange/10 text-app-orange"}`}
+          >
+            {order!.status}
+          </span>
+        </div>
+
+        <div className="grid lg:grid-colo-3 gap-3 ">
+          {/*Left Side - TimeLine map area */}
+          <div>
+            {/* OTP Card */}
+            <OrderOTP order={order} />
+            {/* Live tracking map */}
+            <LiveMap order={order} liveLocation={liveLocation} />
+            {/* Progress Timeline */}
+            <OrderTimeLine order={order} />
+            {/* Delivery Person */}
+            {order?.deliveryPartner &&
+              order.status !== "Delivered" &&
+              order.status !== "Cancelled" && (
+                <div className="bg-white rounded-2xl p-5 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="size-11 rounded-full bg-app-green flex-center">
+                      <span className="text-white font-semibold text-sm">
+                        {order.deliveryPartner.name.charAt(0)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+          </div>
+          {/* Right Side -Order Details */}
+          <div></div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default OrderTracking;
