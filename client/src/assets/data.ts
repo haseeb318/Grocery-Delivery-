@@ -7,8 +7,9 @@ import {
   PhoneIcon,
   MailIcon,
 } from "lucide-react";
-// import hero_bg from "./hero_bg.jpeg";
-// import delivery_truck from "./delivery_truck.svg";
+import { SiFacebook, SiX, SiInstagram } from "@icons-pack/react-simple-icons";
+import hero_bg from "./hero_bg.jpeg";
+import delivery_truck from "./delivery_truck.svg";
 import fruits_vegetables from "./fruits_vegetables.png";
 import dairy_eggs from "./dairy_eggs.png";
 import bakery from "./bakery.png";
@@ -20,16 +21,9 @@ import personal_care from "./personal_care.png";
 import baby_care from "./baby_care.png";
 import meat_seafood from "./meat_seafood.png";
 
-export const heroSectionData = {
-  //   description:
-  //     "Fresh, organic groceries delivered from local farms to your doorstep. Quality you can taste, convenience you deserve.",
-  //   hero_image: hero_bg,
-  hero_features: [
-    { icon: TruckIcon, title: "Free Delivery", desc: "Orders over $20" },
-    { icon: LeafIcon, title: "100% Organic", desc: "Certified products" },
-    { icon: ClockIcon, title: "Same Day", desc: "Express delivery" },
-    { icon: ShieldCheckIcon, title: "Secure Pay", desc: "Safe checkout" },
-  ],
+export const assets = {
+  delivery_truck,
+  hero_bg,
 };
 
 export const categoriesData = [
@@ -48,6 +42,89 @@ export const categoriesData = [
   { slug: "baby-care", name: "Baby Care", image: baby_care },
   { slug: "dairy-eggs", name: "Dairy & Eggs", image: dairy_eggs },
 ];
+
+export const heroSectionData = {
+  description:
+    "Fresh, organic groceries delivered from local farms to your doorstep. Quality you can taste, convenience you deserve.",
+  hero_image: hero_bg,
+  hero_features: [
+    { icon: TruckIcon, title: "Free Delivery", desc: "Orders over $20" },
+    { icon: LeafIcon, title: "100% Organic", desc: "Certified products" },
+    { icon: ClockIcon, title: "Same Day", desc: "Express delivery" },
+    { icon: ShieldCheckIcon, title: "Secure Pay", desc: "Safe checkout" },
+  ],
+};
+
+export const deliveryPartnerLoginImage =
+  "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=200";
+
+export const appPromoBannerData = {
+  title: "Get fresh groceries in minutes",
+  description:
+    "Download the Instacart app for exclusive deals, real-time tracking, and the freshest selection delivered right to your door.",
+};
+
+export const footerData = {
+  brand: {
+    name: "Instacart",
+    description:
+      "Bringing fresh, organic groceries straight from local farms to your doorstep. Nourish your home with Earth's finest.",
+    socials: [
+      { icon: SiFacebook, link: "#" },
+      { icon: SiX, link: "#" },
+      { icon: SiInstagram, link: "#" },
+    ],
+  },
+
+  sections: [
+    {
+      title: "Quick Links",
+      links: [
+        { label: "All Products", to: "/products" },
+        { label: "Flash Deals", to: "/deals" },
+        { label: "Track Order", to: "/orders" },
+        { label: "Delivery Partner", to: "/delivery" },
+      ],
+    },
+    {
+      title: "Customer Service",
+      links: [
+        { label: "My Account", to: "#" },
+        { label: "Order History", to: "#" },
+        { label: "Addresses", to: "#" },
+        { label: "Help Center", href: "#" },
+      ],
+    },
+  ],
+
+  contact: [
+    { icon: MapPinIcon, text: "123 Green Valley Rd, Portland" },
+    { icon: PhoneIcon, text: "+1 (111) 123-4567" },
+    { icon: MailIcon, text: "hello@example.com" },
+  ],
+
+  bottom: {
+    copyright: "© 2026 Greatstack. All rights reserved.",
+    links: [
+      { label: "Privacy Policy", href: "#" },
+      { label: "Terms of Service", href: "#" },
+    ],
+  },
+};
+
+export const statusColors: Record<string, string> = {
+  Placed: "bg-blue-100 text-blue-700",
+  Confirmed: "bg-indigo-100 text-indigo-700",
+  Packed: "bg-purple-100 text-purple-700",
+  "Out for Delivery": "bg-app-orange/10 text-app-orange",
+  Delivered: "bg-green-100 text-green-700",
+  Cancelled: "bg-red-100 text-red-700",
+};
+
+export const iconsForLeafpad = {
+  truck: "https://cdn-icons-png.flaticon.com/512/3097/3097180.png",
+  destination: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
+};
 
 export const dummyProducts = [
   {
@@ -910,5 +987,36 @@ export const dummyDashboardOrdersData = [
     createdAt: "2026-04-06T07:53:05.774Z",
     updatedAt: "2026-04-06T08:47:28.984Z",
     __v: 4,
+  },
+];
+
+export const dummyCartData = [
+  { product: dummyProducts[0], quantity: 1 },
+  { product: dummyProducts[1], quantity: 1 },
+  { product: dummyProducts[2], quantity: 1 },
+];
+
+export const dummyAddressData = [
+  {
+    label: "Home",
+    address: "123 Main St ",
+    city: "New York ",
+    state: "NY",
+    zip: "10001",
+    isDefault: true,
+    lat: 40.7128,
+    lng: -74.006,
+    _id: "69d3652df9a340288f1a0f8c",
+  },
+  {
+    label: "Work",
+    address: "456 Market St ",
+    city: "New York ",
+    state: "NY",
+    zip: "10002",
+    isDefault: false,
+    lat: 40.7128,
+    lng: -74.006,
+    _id: "69d3652df9a340288f1a0f8d",
   },
 ];
