@@ -7,7 +7,6 @@ function AddressForm({
   setForm,
   editingId,
 }: any) {
-  console.log("edited id", editingId);
   return (
     <>
       {/* overlay */}
