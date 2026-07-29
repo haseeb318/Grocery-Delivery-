@@ -28,7 +28,7 @@ function Navbar() {
   const handleSearch = (e: React.SubmitEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      naviagte(`/search?q${encodeURIComponent(searchQuery.trim())}`);
+      naviagte(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery("");
     }
   };
