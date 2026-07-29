@@ -12,6 +12,14 @@ import Myorder from "./pages/Myorder";
 import OrderTracking from "./pages/OrderTracking";
 import Addresses from "./pages/Addresses";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminProductForm from "./pages/admin/AdminProductForm";
+import AdminOrders from "./pages/admin/AdminOrders";
+import AdminDeliveryPartners from "./pages/admin/AdminDeliveryPartners";
+import DeliveryLogin from "./pages/delivery/DeliveryLogin";
+import DeliveryLayout from "./pages/delivery/DeliveryLayout";
+import DeliveryDashboard from "./pages/delivery/DeliveryDashboard";
 
 function App() {
   return (
@@ -45,6 +53,22 @@ function App() {
             <Route path="orders/:id" element={<OrderTracking />} />
             <Route path="addresses" element={<Addresses />} />
           </Route>
+        </Route>
+        {/* Admin route */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="products" element={<AdminDashboard />} />
+          <Route path="products/new" element={<AdminProductForm />} />
+          <Route path="products/:id/edit" element={<AdminProductForm />} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="delivery-partners" element={<AdminDeliveryPartners />} />
+        </Route>
+
+        {/* Delivery Partner pages */}
+
+        <Route path="/delivery/login" element={<DeliveryLogin />} />
+        <Route path="/delivery" element={<DeliveryLayout />}>
+          <Route index element={<DeliveryDashboard />} />
         </Route>
       </Routes>
     </>
