@@ -7,6 +7,9 @@ node_modules/
 /build/
 /.next/
 
+# Prisma generated files
+server/generated/
+
 # Environment files
 .env
 .env.*
